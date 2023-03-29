@@ -1,10 +1,10 @@
 import it.justwrote.kjob.InMem
 import it.justwrote.kjob.Job
 import it.justwrote.kjob.kjob
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
 
 object MyFirstDelayedJob : Job("my-first-delayed-job") {
     val index = integer("index")

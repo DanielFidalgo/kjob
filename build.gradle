@@ -21,11 +21,11 @@ subprojects {
     apply plugin: 'jacoco'
 
     compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "17"
     }
 
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "17"
     }
 
     test {
@@ -53,10 +53,6 @@ subprojects {
 
     jacocoTestReport {
         reports {
-            xml.enabled = false
-            html.enabled = true
-            csv.enabled = false
-
             html.destination file("${buildDir}/reports/jacoco/test/html")
         }
 
@@ -75,18 +71,12 @@ subprojects {
     check.dependsOn jacocoTestCoverageVerification
     test.finalizedBy jacocoTestReport
 
-    task testJar(type: Jar) {
-        classifier "test"
-        from sourceSets.test.output
-    }
+
 
     configurations {
         testArtifacts.extendsFrom testRuntime
     }
 
-    artifacts {
-        testArtifacts testJar
-    }
 }
 
 coveralls {
@@ -104,10 +94,7 @@ task codeCoverageReport(type: JacocoReport) {
     }
 
     reports {
-        xml.enabled true
         xml.destination file("${buildDir}/reports/jacoco/report.xml")
-        html.enabled false
-        csv.enabled false
     }
 }
 
